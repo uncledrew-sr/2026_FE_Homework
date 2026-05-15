@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  background: linear-gradient(45deg, #ff00ff, #00ff00, #ffff00, #00ffff, #ff0000);
+  background-size: 400% 400%;
+  animation: rainbowBgm 2s infinite;
+  font-family: '궁서', '궁서체', 'Comic Sans MS', serif; 
+  color: #ffffff;
+  text-shadow: 2px 2px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000; /* 검은색 테두리 */
+}
+
+@keyframes rainbowBgm {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+h1 {
+  font-size: 4rem !important;
+  color: yellow !important;
+  text-decoration: underline red wavy;
+  text-align: center;
+  animation: crazyTitle 0.3s infinite alternate;
+}
+
+@keyframes crazyTitle {
+  0% { transform: rotate(-5deg) scale(1); }
+  100% { transform: rotate(5deg) scale(1.1); }
+}
+
+img {
+  border: 15px dotted limegreen;
+  border-radius: 50% !important;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  animation: spinDog 5s linear infinite;
+  margin: 0 auto;
+}
+
+img:hover {
+  animation: spinDog 0.2s linear infinite reverse;
+}
+
+@keyframes spinDog {
+  100% { transform: rotate(360deg); }
+}
+
+input {
+  background-color: hotpink !important;
+  color: lime !important;
+  font-size: 2rem !important;
+  border: 8px dashed yellow !important;
+  text-align: center;
+  padding: 20px !important;
+  font-family: '궁서', serif;
+  width: 80%;
+  margin: 20px auto;
+  display: block;
+}
+
+input:focus {
+  outline: 10px solid aqua;
+  transform: scale(1.1) rotate(2deg);
+}
+
+button {
+  background-color: #0000ff !important;
+  color: yellow !important;
+  font-size: 2rem !important;
+  font-weight: bold;
+  border: 10px ridge red !important;
+  padding: 20px 40px !important;
+  margin: 10px auto;
+  display: block;
+  cursor: crosshair;
+  animation: earthquake 0.1s infinite;
+}
+
+button:hover {
+  background-color: red !important;
+  color: white !important;
+  transform: scale(1.3) rotate(-10deg) !important;
+  animation: none;
+}
+
+@keyframes earthquake {
+  0% { transform: translate(2px, 1px) rotate(0deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.min-h-screen, .bg-gray-50, .bg-white {
+  background: transparent !important;
+  box-shadow: none !important;
+}
