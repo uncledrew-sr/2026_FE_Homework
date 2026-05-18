@@ -1,0 +1,579 @@
+/* ========================================
+   🐶 강아지 퀴즈 — 따뜻한 포근 테마
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+/* ── 전역 색상 변수 ── */
+:root {
+  --sand-50:  #fdf8f0;
+  --sand-100: #f5ead8;
+  --sand-200: #ecdcc0;
+  --sand-300: #dfc9a2;
+  --sand-400: #c9a97a;
+  --sand-500: #b08a55;
+  --sand-600: #8c6a3a;
+
+  --bark-100: #e8d5b5;
+  --bark-200: #d4b896;
+  --bark-300: #b89474;
+  --bark-400: #9a7355;
+  --bark-500: #7a5638;
+
+  --cream:    #fef9f1;
+  --warm-white: #fffdf8;
+
+  --text-dark: #4a3520;
+  --text-mid:  #7a6245;
+  --text-soft: #a89070;
+
+  --correct:   #7db87a;
+  --correct-bg:#f0faf0;
+  --wrong:     #d97070;
+  --wrong-bg:  #fff0f0;
+
+  --shadow-warm: 0 4px 24px rgba(176, 138, 85, 0.18), 0 1px 4px rgba(176, 138, 85, 0.10);
+  --shadow-card: 0 8px 40px rgba(140, 106, 58, 0.14), 0 2px 8px rgba(140, 106, 58, 0.08);
+
+  --radius-pill: 50px;
+  --radius-card: 24px;
+  --radius-btn:  16px;
+
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text-dark);
+  background: var(--sand-50);
+}
+
+/* ── 배경 패턴 (발자국 느낌의 은은한 도트) ── */
+body {
+  min-height: 100vh;
+  background-color: var(--sand-50);
+  background-image:
+    radial-gradient(circle, var(--sand-200) 1.5px, transparent 1.5px);
+  background-size: 36px 36px;
+}
+
+/* ── #root 재정의 ── */
+#root {
+  width: 100%;
+  max-width: 680px;
+  border: none;
+  background: transparent;
+}
+
+/* =======================================
+   홈 화면
+   ======================================= */
+.home-wrap {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  gap: 0;
+}
+
+.home-badge {
+  font-family: 'Gaegu', cursive;
+  font-size: 56px;
+  line-height: 1;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  animation: bounce-slow 2.4s ease-in-out infinite;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.home-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--bark-500);
+  letter-spacing: -0.5px;
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+.home-desc {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 40px;
+  background: var(--sand-100);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: 1.5px dashed var(--bark-200);
+}
+
+.home-card {
+  background: var(--warm-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 40px 32px;
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--sand-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-card::before {
+  content: '🐾';
+  position: absolute;
+  top: -10px;
+  right: 18px;
+  font-size: 72px;
+  opacity: 0.06;
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+
+.home-start-btn {
+  width: 100%;
+  padding: 18px 0;
+  border-radius: var(--radius-btn);
+  border: none;
+  background: linear-gradient(135deg, var(--sand-400), var(--bark-400));
+  color: #fff;
+  font-family: 'Gaegu', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(160, 115, 60, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s;
+  letter-spacing: 0.5px;
+}
+
+.home-start-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 28px rgba(160, 115, 60, 0.40);
+}
+
+.home-start-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* =======================================
+   퀴즈 화면 레이아웃
+   ======================================= */
+.quiz-wrap {
+  min-height: 100svh;
+  background: transparent;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-inner {
+  width: 100%;
+  max-width: 600px;
+  flex-grow: 1;
+}
+
+/* ── 퀴즈 헤더 ── */
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quiz-logo {
+  font-family: 'Gaegu', cursive;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bark-500);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quiz-home-btn {
+  font-size: 13px;
+  color: var(--text-soft);
+  background: var(--sand-100);
+  border: 1.5px solid var(--sand-300);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.quiz-home-btn:hover {
+  background: var(--sand-200);
+  color: var(--text-dark);
+}
+
+/* =======================================
+   문제 카드
+   ======================================= */
+.question-card {
+  background: var(--warm-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 28px 28px 32px;
+  margin-bottom: 20px;
+  border: 1.5px solid var(--sand-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card::after {
+  content: '🐾';
+  position: absolute;
+  bottom: -12px;
+  left: -8px;
+  font-size: 64px;
+  opacity: 0.05;
+  transform: rotate(25deg);
+  pointer-events: none;
+}
+
+/* 진행 표시 */
+.q-progress-label {
+  font-size: 13px;
+  color: var(--text-soft);
+  font-weight: 500;
+  margin-bottom: 14px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.q-progress-label span.num {
+  font-family: 'Gaegu', cursive;
+  font-size: 18px;
+  color: var(--bark-400);
+  font-weight: 700;
+}
+
+/* 이미지 */
+.q-img-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.q-img-wrap img {
+  max-height: 280px;
+  max-width: 100%;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 6px 24px rgba(140, 106, 58, 0.18);
+  border: 3px solid var(--sand-200);
+  transition: transform 0.25s;
+}
+
+.q-img-wrap img:hover {
+  transform: scale(1.015);
+}
+
+/* 입력창 */
+.q-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 18px;
+  border: 2px solid var(--sand-300);
+  border-radius: 14px;
+  background: var(--sand-50);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 15px;
+  color: var(--text-dark);
+  outline: none;
+  margin-bottom: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.q-input::placeholder {
+  color: var(--text-soft);
+  font-size: 13px;
+}
+
+.q-input:focus {
+  border-color: var(--sand-500);
+  box-shadow: 0 0 0 3px rgba(176, 138, 85, 0.18);
+}
+
+.q-input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 제출 버튼 */
+.q-submit-btn {
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--sand-400), var(--bark-400));
+  color: #fff;
+  font-family: 'Gaegu', cursive;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(160, 115, 60, 0.30);
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+
+.q-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(160, 115, 60, 0.38);
+}
+
+.q-submit-btn:disabled {
+  opacity: 0.40;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 결과 박스 */
+.q-result-box {
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  text-align: center;
+  font-family: 'Gaegu', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  animation: pop-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.85); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.q-result-box.correct {
+  background: var(--correct-bg);
+  color: var(--correct);
+  border: 2px solid rgba(125, 184, 122, 0.35);
+}
+
+.q-result-box.wrong {
+  background: var(--wrong-bg);
+  color: var(--wrong);
+  border: 2px solid rgba(217, 112, 112, 0.30);
+}
+
+.q-result-answer {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 6px;
+  color: var(--text-mid);
+}
+
+.q-result-answer strong {
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* 다음 문제 버튼 */
+.q-next-btn {
+  width: 100%;
+  padding: 14px 0;
+  border: none;
+  border-radius: 14px;
+  background: var(--bark-500);
+  color: #fff;
+  font-family: 'Gaegu', cursive;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.q-next-btn:hover {
+  background: var(--bark-400);
+  transform: translateY(-2px);
+}
+
+/* =======================================
+   진행 바
+   ======================================= */
+.progress-wrap {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 8px;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-family: 'Gaegu', cursive;
+  font-size: 16px;
+}
+
+.progress-labels .lbl-correct { color: var(--correct); }
+.progress-labels .lbl-wrong   { color: var(--wrong); }
+.progress-labels .lbl-remain  { color: var(--text-soft); }
+
+.progress-bar-track {
+  width: 100%;
+  height: 18px;
+  background: var(--sand-200);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  display: flex;
+  gap: 3px;
+  padding: 3px;
+  box-sizing: border-box;
+  box-shadow: inset 0 2px 5px rgba(140, 106, 58, 0.12);
+}
+
+.progress-seg {
+  flex: 1;
+  height: 100%;
+  border-radius: 50px;
+  transition: background-color 0.4s ease;
+}
+
+.progress-seg.correct  { background: var(--correct); }
+.progress-seg.wrong    { background: var(--wrong); }
+.progress-seg.remain   { background: transparent; }
+
+/* =======================================
+   로딩 화면
+   ======================================= */
+.loading-wrap {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--sand-50);
+}
+
+.loading-paw {
+  font-size: 52px;
+  animation: paw-spin 1.2s ease-in-out infinite;
+}
+
+@keyframes paw-spin {
+  0%   { transform: rotate(-15deg) scale(1); }
+  50%  { transform: rotate(15deg) scale(1.15); }
+  100% { transform: rotate(-15deg) scale(1); }
+}
+
+.loading-text {
+  font-family: 'Gaegu', cursive;
+  font-size: 22px;
+  color: var(--text-mid);
+}
+
+/* =======================================
+   퀴즈 종료 화면
+   ======================================= */
+.finished-wrap {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.finished-card {
+  background: var(--warm-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 48px 36px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  border: 1.5px solid var(--sand-200);
+  position: relative;
+  overflow: hidden;
+  animation: slide-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slide-up {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.finished-trophy {
+  font-size: 64px;
+  margin-bottom: 8px;
+  display: block;
+  animation: bounce-slow 2.4s ease-in-out infinite;
+}
+
+.finished-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bark-500);
+  margin: 0 0 24px;
+}
+
+.finished-stats {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.stat-chip {
+  flex: 1;
+  padding: 16px 10px;
+  border-radius: 16px;
+  font-family: 'Gaegu', cursive;
+}
+
+.stat-chip .stat-num {
+  font-size: 36px;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+
+.stat-chip .stat-label {
+  font-size: 14px;
+  margin-top: 4px;
+  display: block;
+}
+
+.stat-chip.correct-chip {
+  background: var(--correct-bg);
+  color: var(--correct);
+  border: 2px solid rgba(125, 184, 122, 0.30);
+}
+
+.stat-chip.wrong-chip {
+  background: var(--wrong-bg);
+  color: var(--wrong);
+  border: 2px solid rgba(217, 112, 112, 0.25);
+}
+
+.finished-home-btn {
+  width: 100%;
+  padding: 16px 0;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--sand-400), var(--bark-400));
+  color: #fff;
+  font-family: 'Gaegu', cursive;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(160, 115, 60, 0.32);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.finished-home-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 26px rgba(160, 115, 60, 0.40);
+}
