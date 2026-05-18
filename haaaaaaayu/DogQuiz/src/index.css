@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@300;400;700&family=Gowun+Dodum&display=swap');
+
+:root {
+  --pink: #ffb6c1;
+  --pink-dark: #ff8fa3;
+  --peach: #ffdab9;
+  --mint: #b5ead7;
+  --mint-dark: #7ecba1;
+  --lavender: #c3b1e1;
+  --sky: #a0d2f0;
+  --cream: #fff9f0;
+  --warm-white: #fffaf5;
+  --brown: #8b6f47;
+  --brown-light: #c4a574;
+  --text-dark: #5a4a3a;
+  --text-mid: #8b7a6a;
+  --text-light: #b0a090;
+  --correct-bg: #d4f5d4;
+  --correct-text: #2d7a2d;
+  --wrong-bg: #ffd4d4;
+  --wrong-text: #c44040;
+  --shadow-soft: 0 4px 20px rgba(139, 111, 71, 0.1);
+  --shadow-card: 0 8px 32px rgba(139, 111, 71, 0.12);
+  --radius-cute: 20px;
+  --radius-round: 50px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Gowun Dodum', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========== 배경 장식 (떠다니는 발바닥) ========== */
+body::before,
+body::after {
+  content: '🐾';
+  position: fixed;
+  font-size: 80px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  animation: floatPaw 8s ease-in-out infinite;
+}
+body::before {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+body::after {
+  bottom: 15%;
+  right: 8%;
+  animation-delay: 4s;
+}
+
+@keyframes floatPaw {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* ========== 홈 페이지 ========== */
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(181, 234, 215, 0.2) 0%, transparent 50%),
+    var(--cream);
+}
+
+.home-card {
+  background: var(--warm-white);
+  border-radius: 32px;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 3px solid var(--pink);
+  position: relative;
+  overflow: hidden;
+}
+
+.home-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pink) 0px,
+    var(--pink) 16px,
+    var(--peach) 16px,
+    var(--peach) 32px,
+    var(--mint) 32px,
+    var(--mint) 48px,
+    var(--lavender) 48px,
+    var(--lavender) 64px,
+    var(--sky) 64px,
+    var(--sky) 80px
+  );
+  border-radius: 32px 32px 0 0;
+}
+
+.home-emoji {
+  font-size: 72px;
+  margin-bottom: 16px;
+  display: block;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.home-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.home-desc {
+  font-size: 1rem;
+  color: var(--text-mid);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.home-start-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  color: white;
+  border: none;
+  padding: 16px 48px;
+  border-radius: var(--radius-round);
+  font-family: 'Gaegu', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 143, 163, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(255, 143, 163, 0.5);
+}
+
+.home-start-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.home-start-btn::after {
+  content: ' 🐶';
+}
+
+.home-paws {
+  margin-top: 24px;
+  font-size: 24px;
+  letter-spacing: 8px;
+  opacity: 0.3;
+}
+
+/* ========== 퀴즈 페이지 ========== */
+.quiz-container {
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(195, 177, 225, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(160, 210, 240, 0.15) 0%, transparent 50%),
+    var(--cream);
+}
+
+.quiz-inner {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.quiz-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--brown);
+}
+
+.quiz-home-btn {
+  background: var(--warm-white);
+  border: 2px solid var(--brown-light);
+  border-radius: var(--radius-round);
+  padding: 8px 20px;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quiz-home-btn:hover {
+  background: var(--peach);
+  border-color: var(--brown);
+  color: var(--text-dark);
+}
+
+/* ========== 로딩 ========== */
+.loading-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: var(--cream);
+}
+
+.loading-dog {
+  font-size: 56px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.loading-text {
+  font-family: 'Gaegu', cursive;
+  font-size: 1.4rem;
+  color: var(--text-mid);
+}
+
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}
+
+/* ========== 문제 카드 ========== */
+.question-card {
+  background: var(--warm-white);
+  padding: 32px;
+  border-radius: 28px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+  border: 2px solid rgba(139, 111, 71, 0.08);
+  position: relative;
+}
+
+.question-card::after {
+  content: '🐕';
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  font-size: 28px;
+  background: var(--cream);
+  padding: 0 8px;
+}
+
+.question-number {
+  font-family: 'Gaegu', cursive;
+  font-size: 1rem;
+  color: var(--pink-dark);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.question-img-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.question-img {
+  max-height: 280px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-cute);
+  border: 3px solid var(--peach);
+  box-shadow: 0 4px 16px rgba(139, 111, 71, 0.1);
+}
+
+.question-input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2.5px solid var(--brown-light);
+  border-radius: 16px;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background: var(--cream);
+  margin-bottom: 16px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.question-input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.25);
+}
+
+.question-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.question-input::placeholder {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--mint), var(--mint-dark));
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Gaegu', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(126, 203, 161, 0.35);
+  transition: all 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(126, 203, 161, 0.45);
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 결과 박스 */
+.result-box {
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  margin-bottom: 16px;
+  font-weight: 700;
+  font-family: 'Gaegu', cursive;
+  font-size: 1.4rem;
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.result-box.correct {
+  background: var(--correct-bg);
+  color: var(--correct-text);
+  border: 2px solid var(--correct-text);
+}
+
+.result-box.wrong {
+  background: var(--wrong-bg);
+  color: var(--wrong-text);
+  border: 2px solid var(--wrong-text);
+}
+
+.result-actual {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-mid);
+  margin-top: 6px;
+}
+
+.result-actual strong {
+  color: var(--text-dark);
+}
+
+.next-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--lavender), #a58fd0);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Gaegu', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(165, 143, 208, 0.35);
+  transition: all 0.3s;
+}
+
+.next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(165, 143, 208, 0.45);
+}
+
+/* ========== 프로그레스 바 ========== */
+.progress-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 16px auto 0;
+}
+
+.progress-counts {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.progress-correct { color: var(--correct-text); }
+.progress-wrong { color: var(--wrong-text); }
+.progress-remaining { color: var(--text-light); }
+
+.progress-bar {
+  width: 100%;
+  height: 28px;
+  background: var(--warm-white);
+  border-radius: var(--radius-round);
+  overflow: hidden;
+  display: flex;
+  border: 2px solid rgba(139, 111, 71, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.progress-segment {
+  height: 100%;
+  flex: 1;
+  transition: background-color 0.4s ease;
+}
+
+.progress-segment.correct { background: var(--mint); }
+.progress-segment.wrong { background: var(--pink); }
+.progress-segment.empty { background: transparent; }
+
+/* ========== 결과 화면 ========== */
+.finished-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.3) 0%, transparent 60%),
+    var(--cream);
+}
+
+.finished-card {
+  background: var(--warm-white);
+  border-radius: 32px;
+  padding: 48px 40px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 3px solid var(--peach);
+  animation: popIn 0.5s ease-out;
+}
+
+.finished-emoji {
+  font-size: 64px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.finished-title {
+  font-family: 'Gaegu', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 24px;
+}
+
+.finished-score {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  padding: 10px 0;
+}
+
+.finished-score.correct {
+  color: var(--correct-text);
+}
+
+.finished-score.wrong {
+  color: var(--wrong-text);
+}
+
+.finished-score strong {
+  font-family: 'Gaegu', cursive;
+  font-size: 1.6rem;
+}
+
+.finished-message {
+  font-family: 'Gaegu', cursive;
+  font-size: 1.3rem;
+  color: var(--text-mid);
+  margin: 20px 0 28px;
+  line-height: 1.4;
+}
+
+.finished-home-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--peach), #ffb88c);
+  color: var(--brown);
+  border: none;
+  padding: 14px 40px;
+  border-radius: var(--radius-round);
+  font-family: 'Gaegu', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 184, 140, 0.4);
+  transition: all 0.3s ease;
+}
+
+.finished-home-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(255, 184, 140, 0.5);
+}
+
+/* ========== 반응형 ========== */
+@media (max-width: 520px) {
+  .home-card,
+  .finished-card {
+    padding: 36px 24px;
+    border-radius: 24px;
+  }
+
+  .home-title {
+    font-size: 1.8rem;
+  }
+
+  .question-card {
+    padding: 24px 20px;
+  }
+
+  .question-img {
+    max-height: 220px;
+  }
+}
