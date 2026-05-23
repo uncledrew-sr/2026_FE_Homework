@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import CatFactBox from './components/CatFactBox.jsx';
 import TodoInput from './components/TodoInput.jsx';
 import TodoList from './components/TodoList.jsx';
 
@@ -71,40 +72,44 @@ function App() {
 
   return (
     <main className="app">
-      <section className="todo-shell">
-        <header className="top-bar">
-          <h1>Todo</h1>
-          <span>
-            {completedCount}/{todos.length}
-          </span>
-        </header>
+      <div className="layout">
+        <section className="todo-shell">
+          <header className="top-bar">
+            <h1>Todo</h1>
+            <span>
+              {completedCount}/{todos.length}
+            </span>
+          </header>
 
-        <TodoInput onAdd={addTodo} />
+          <TodoInput onAdd={addTodo} />
 
-        <div className="filter-row">
-          {filters.map((item) => (
-            <button
-              className={filter === item ? 'filter active' : 'filter'}
-              key={item}
-              onClick={() => setFilter(item)}
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
+          <div className="filter-row">
+            {filters.map((item) => (
+              <button
+                className={filter === item ? 'filter active' : 'filter'}
+                key={item}
+                onClick={() => setFilter(item)}
+                type="button"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
 
-        {error && <p className="notice">{error}</p>}
-        {isLoading ? (
-          <p className="empty">불러오는 중...</p>
-        ) : (
-          <TodoList
-            todos={filteredTodos}
-            onDelete={deleteTodo}
-            onToggle={toggleTodo}
-          />
-        )}
-      </section>
+          {error && <p className="notice">{error}</p>}
+          {isLoading ? (
+            <p className="empty">불러오는 중...</p>
+          ) : (
+            <TodoList
+              todos={filteredTodos}
+              onDelete={deleteTodo}
+              onToggle={toggleTodo}
+            />
+          )}
+        </section>
+
+        <CatFactBox />
+      </div>
     </main>
   );
 }
