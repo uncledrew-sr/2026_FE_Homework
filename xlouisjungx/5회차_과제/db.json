@@ -1,0 +1,25 @@
+{
+  "todos": [
+    {
+      "id": "2",
+      "title": "API 실습하기",
+      "completed": false
+    },
+    {
+      "title": "멋사 실습 과제하기",
+      "completed": false,
+      "id": "scmpbyG9lLM"
+    },
+    {
+      "title": "나만의 스타일 적용하기",
+      "completed": true,
+      "id": "XKUJM8AL9q4"
+    },
+    {
+      "title": "ollama AI 추가해서 분석하고 계획 방향을 추천받는 기능 추가하기",
+      "completed": true,
+      "id": "pDqohqugpV4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
