@@ -1,0 +1,25 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "리액트 공부하기",
+      "completed": true
+    },
+    {
+      "title": "여행준비",
+      "completed": true,
+      "id": "r_7TEPEb49c"
+    },
+    {
+      "title": "잠자기",
+      "completed": false,
+      "id": "Y-je-hNWlxc"
+    },
+    {
+      "title": "멋사 과제",
+      "completed": false,
+      "id": "jWUeL5kH0PM"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
